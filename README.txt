@@ -1,0 +1,1 @@
+npx tsc --watch <- Per attivare la compilazione

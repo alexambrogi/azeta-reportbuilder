@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .breakPage {
+            page-break-after: always;
+        }
+
+        .bold {
+            color: #1f497d;
+            font-size: 12pt;
+            font-weight: bold;
+            font-family: "Calibri";
+            padding: 0 10px;
+        }
+
+        .regular {
+            color: #1f497d;
+            font-size: 12pt;
+            font-weight: normal;
+            font-family: "Calibri";
+            padding: 0 10px;
+        }
+
+        .no-margin {
+            margin: 0;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
+
+        .regular__min {
+            color: #1f497d;
+            font-size: 10pt;
+            font-weight: normal;
+            font-family: "Calibri";
+            padding: 0 10px;
+        }
+
+        .container {
+            page-break-inside: avoid;
+        }
+
+        .containerPadding {
+            padding: 0px;
+        }
+
+        .container__title {
+            text-align: end;
+            width: 100%;
+            border-bottom: 2px solid #6e6e6e;
+        }
+
+        .container__title__title {
+            color: #023671;
+            font-size: 24pt !important;
+            font-family: "Calibri";
+            font-weight: normal;
+        }
+
+        h1.container__title__title {
+            margin-bottom: 4px !important;
+        }
+
+        h3.container__title__subtitle {
+            margin-top: 4px !important;
+        }
+
+        .container__title__subtitle {
+            color: #023671;
+            font-size: 16pt !important;
+            font-family: "Calibri";
+            font-weight: normal;
+        }
+
+        .cellSx {
+            text-align: center;
+            background-color: #eeeeee !important;
+            width: 50%;
+        }
+
+        .cellDx {
+            text-align: center;
+            width: 50%;
+        }
+
+        table {
+            border: 1px solid #333;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid #333;
+        }
+
+        /* NB */
+
+        .container__nb {
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        /* INDICE */
+
+        .container__contenuti {
+            padding-top: 0pt;
+            padding-bottom: 0;
+        }
+
+        .container__inner_contenuti {
+            padding: 1rem;
+        }
+
+        .contentuti__row {
+            display: flex;
+            width: 100%;
+        }
+
+        .contenuti__row__sx {
+            width: 90%;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .contenuti__row__dx {
+            width: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* get by script */
+        .table3 {
+            position: relative;
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            /*  border: 1px solid white; */
+        }
+
+        .table3 th {
+            color: black;
+        }
+
+        .table3 td {
+            color: rgb(0, 0, 0);
+        }
+
+        .table3 th,
+        .table3 td {
+            /* border: none;*/
+            /*  border: 1px solid rgb(255, 255, 255); */
+            /* Aggiunge un bordo alle celle */
+            font-size: 9px;
+            /* white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+            color: #023671;
+        }
+
+        .bkT2 {
+            border: none;
+            background-color: white;
+            color: #023671;
+        }
+
+        .bkT1 {
+            border: none;
+            background-color: #023671;
+            color: rgba(255, 255, 255, 0.932);
+        }
+
+        .regular__min {
+            text-align: justify;
+        }
+
+        .tableBuilding {
+            width: 100%;
+            border: 0.5px solid black !important;
+        }
+
+        .thBuilding {
+            text-align: center;
+            border: 0.5px solid black !important;
+        }
+
+        .pBuilding {
+            color: #1f497d !important;
+            font-size: x-small;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="container">
+            {{!-- TITOLO REPORT --}}
+            <div class="container__title">
+                {{#if (eq campaign_kind_id '700')}}
+                <h1 class="container__title__title">Rintraccio Eredi Basic</h1>
+                {{/if}}
+                {{#if (eq campaign_kind_id '701')}}
+                <h1 class="container__title__title">Rintraccio Eredi Medium</h1>
+                {{/if}}
+                {{#if (eq campaign_kind_id '702')}}
+                <h1 class="container__title__title">Rintraccio Eredi Plus</h1>
+                {{/if}}
+                <h3 class="container__title__subtitle">Persona fisica</h3>
+            </div>
+            <!-- TABELLA -->
+            <table style="width: 100%; margin-top: 50px">
+                {{#if registry.surname}}
+                <thead>
+                    <th colspan="2">
+                        <p class="bold no-margin" style="text-align: center">
+                            {{registry.name}} {{registry.surname}}
+                        </p>
+                    </th>
+                </thead>
+                {{/if}}
+                <tbody>
+                    <tr style="border: none">
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">
+                                INFORMAZIONE N°
+                            </p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{informazioneN}}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">
+                                RIF. CLIENTE
+                            </p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">
+                                DATA RICHIESTA
+                            </p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{inputData.dateRequested}}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">
+                                DATA EVASIONE
+                            </p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{inputData.dateFulfillment}}
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- DATI INPUT -->
+            <table style="width: 100%; margin-top: 50px">
+                <thead>
+                    <th colspan="2">
+                        <p class="bold no-margin" style="text-align: center">
+                            DATI INPUT
+                        </p>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">
+                                CODICE FISCALE
+                            </p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{registry.cf}}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="border: none">
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">COGNOME</p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{registry.surname}}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; background: #eeeeee">
+                            <p class="bold no-margin" style="text-align: center">NOME</p>
+                        </td>
+                        <td style="width: 50%">
+                            <p class="regular no-margin" style="text-align: center">
+                                {{registry.name}}
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- N.B. -->
+            <div class="container__nb breakPage">
+                <span class="bold">N.B.</span>
+                <p class="regular__min">
+                    Le informazioni ed i dati forniti dalla nostra azienda alla propria
+                    clientela, sono raccolti e trattati secondo quanto disposto dal D.
+                    Lgs. 196 del 2003 e dal nuovo RE 679/2016. I clienti possono quindi
+                    utilizzare i dati e le informazioni fornite secondo le modalità
+                    previste dalla legge per la tutela dei propri diritti.
+                    L’informazione ha natura strettamente riservata, personale e
+                    confidenziale, pertanto non può essere divulgata a terzi e tantomeno
+                    in sede giudiziaria in quanto le informazioni presenti non sono
+                    supportate da prove documentali. Ci esimiamo da qualsiasi
+                    responsabilità consequenziale, di natura civile, penale derivanti da
+                    dette violazioni. E’ sin da ora escluso qualunque titolo e motivo di
+                    azione di rivalsa per le notizie fornite.
+                </p>
+            </div>
+            <!-- INDICE -->
+            <div class="container__contenuti breakPage">
+                <p class="bold">Contenuti</p>
+                <div class="container__inner_contenuti">
+                    {{!-- Riepilogo --}}
+                    <a href="#RIEPILOGO_INDAGINE" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">RIEPILOGO INDAGINE</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" id="indice_riepilogo_indagine"
+                                    style="display:none">::RIEPILOGO_INDAGINE</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{!-- Anagrafica --}}
+                    <a href="#ANAGRAFICA" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">ANAGRAFICA</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::ANAGRAFICA</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{!-- Eredi chiamati --}}
+                    <a href="#EREDI" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">RICERCA EREDI</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::RICERCA_EREDI</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{!-- Eredi accettanti --}}
+                    {{#if (eq campaign_kind_id '701')}}
+                    {{#if acceptingHeirs.length}}
+                    <a href="#EREDI_ACCETTANTI" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">EREDI ACCETTANTI</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::EREDI_ACCETTANTI</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{/if}}
+                    {{/if}}
+                    {{#if (eq campaign_kind_id '702')}}
+                    {{#if acceptingHeirs.length}}
+                    <a href="#EREDI_ACCETTANTI" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">EREDI ACCETTANTI</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::EREDI_ACCETTANTI</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{/if}}
+                    {{/if}}
+                    {{!-- ACCETTAZIONE EREDITA --}}
+                    <a href="#ACCETTAZIONE_EREDITA" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">ACCETTAZIONE EREDITA'</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::ACCETTAZIONE_EREDITA'</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{!-- Immobili --}}
+                    {{#if (eq campaign_kind_id '702')}}
+                    <a href="#IMMOBILI" style="text-decoration: none">
+                        <div class="contentuti__row">
+                            <div class="contenuti__row__sx">
+                                <p class="regular">RICERCA IMMOBILI</p>
+                            </div>
+                            <div class="contenuti__row__dx">
+                                <span class="regular" style="display:none">::RICERCA_IMMOBILI</span>
+                            </div>
+                        </div>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            <!-- RIEPILOGO INDAGINE -->
+            <div class="container_riepilogo_indagine breakPage" id="RIEPILOGO_INDAGINE">
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :RIEPILOGO INDAGINE
+                </p>
+                <!-- TABELLA -->
+                <table style="width: 100%; margin-top: 25px">
+                    {{#if registry.surname}}
+                    <thead>
+                        <th colspan="2">
+                            <p class="bold no-margin" style="text-align: center">
+                                {{registry.name}} {{registry.surname}}
+                            </p>
+                        </th>
+                    </thead>
+                    {{/if}}
+                    <tbody>
+                        {{!-- Anagrafica --}}
+                        <tr style="border: none">
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#ANAGRAFICA" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        ANAGRAFICA
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if registry}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    PRESENTE
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NON PRESENTE
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{!-- Eredi chiamati --}}
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#EREDI" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        RICERCA EREDI
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if (or searchHeirs.length acceptingHeirs.length) }}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    POSITIVO
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NEGATIVO
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{!-- Eredi accettanti --}}
+                        {{#if (eq campaign_kind_id '701')}}
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#EREDI" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        EREDI ACCETTANTI
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if acceptingHeirs.length }}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    POSITIVO
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NEGATIVO
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{/if}}
+                        {{#if (eq campaign_kind_id '702')}}
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#EREDI" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        EREDI ACCETTANTI
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if isAccettata }}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    POSITIVO
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NEGATIVO
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{/if}}
+
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#ACCETTAZIONE_EREDITA" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        ACCETTAZIONE EREDITA'
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if isAccettata}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    PRESENTE
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NON PRESENTE
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+
+                        {{!-- Immobili --}}
+                        {{#if (eq campaign_kind_id '702')}}
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <a href="#IMMOBILI" style="text-decoration: none">
+                                    <p class="bold no-margin" style="text-align: center">
+                                        IMMOBILI
+                                    </p>
+                                </a>
+                            </td>
+                            {{#if buildings.find}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #008000">
+                                    PRESENTI
+                                </p>
+                            </td>
+                            {{else}}
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                    NON PRESENTI
+                                </p>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+            <!-- ANAGRAFICA -->
+            <div class="container" id="ANAGRAFICA">
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :ANAGRAFICA
+                </p>
+                <!-- TABELLA -->
+                <table style="width: 100%">
+                    <tbody>
+                        <tr style="border: none">
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    COGNOME
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.surname}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    NOME
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.name}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    CODICE FISCALE
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.cf}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    DATA DI NASCITA
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.dateOfBirth}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    LUOGO DI NASCITA
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.placeOfBirth}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    ULTIMA RESIDENZA
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.address}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%; background: #eeeeee">
+                                <p class="bold no-margin" style="text-align: left">
+                                    DATA DI DECESSO
+                                </p>
+                            </td>
+                            <td style="width: 50%">
+                                <p class="regular no-margin" style="text-align: left">
+                                    {{registry.dateOfDeath}}
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Ricerca EREDI E CONTROLLO-->
+            <div class="container">
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :RICERCA EREDI
+                </p>
+                <p class="regular">
+                    {{registry.deathNote}}
+                </p>
+                {{#if (or searchHeirs.length acceptingHeirs.length) }}
+                <p class="regular">
+                    A seguito delle ricerche ed accertamenti effettuati abbiamo accertato che, alla data odierna,
+                    emergono i soggetti sotto
+                    indicati in qualità di possibili eredi.
+                </p>
+                {{else}}
+                <p class="regular">
+                    A seguito delle indagini effettuate non sono stati rilevati eredi chiamati all'eredità.
+                </p>
+                {{/if}}
+            </div>
+
+            <!-- EREDI CHIAMATI-->
+            <div class="container" id="EREDI">
+                {{#if searchHeirs.length}}
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    EREDI CHIAMATI
+                </p>
+                {{#each searchHeirs as |heir|}}
+                <div class="container">
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr style="border: none">
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        COGNOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.surname}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        NOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.firstName}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        DATA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.dateOfBirth}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        LUOGO DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.birthPlace}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROVINCIA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.countryOfBirth}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        CODICE FISCALE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.taxIdCode}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        RESIDENZA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.address}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        UTENZE TELEFONICHE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    {{#each heir.telephones as |tel|}}
+                                    <p class="regular no-margin" style="text-align: left">{{tel}}</p>
+                                    {{/each}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        GRADO DI PARENTELA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">{{heir.parentela}}</p>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROPRIETA' IMMOBILIARI
+                                    </p>
+                                </td>
+                                {{#if heir.buildings}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        PRESENTI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NON PRESENTI
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                {{/each}}
+                {{/if}}
+            </div>
+
+            <!-- EREDI ACCETTANTI-->
+            {{#if (eq campaign_kind_id '701')}}
+            <div class="container" id="EREDI_ACCETTANTI">
+                {{#if acceptingHeirs.length}}
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :EREDI ACCETTANTI
+                </p>
+                {{#each acceptingHeirs as |heir|}}
+                <div class="container">
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr style="border: none">
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        COGNOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.surname}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        NOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.firstName}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        DATA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.dateOfBirth}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        LUOGO DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.birthPlace}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROVINCIA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.countryOfBirth}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        CODICE FISCALE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.taxIdCode}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        RESIDENZA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.address}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        UTENZE TELEFONICHE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    {{#each heir.telephones as |tel|}}
+                                    <p class="regular no-margin" style="text-align: left">{{tel}}</p>
+                                    {{/each}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        GRADO DI PARENTELA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">{{heir.parentela}}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROPRIETA' IMMOBILIARI
+                                    </p>
+                                </td>
+                                {{#if heir.buildings}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        PRESENTI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NON PRESENTI
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        ACCETTATA
+                                    </p>
+                                </td>
+                                {{#if heir.accettaEredita}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        SI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NO
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                {{/each}}
+                {{/if}}
+            </div>
+            {{/if}}
+
+            <!-- EREDI ACCETTANTI-->
+            {{#if (eq campaign_kind_id '702')}}
+            <div class="container" id="EREDI_ACCETTANTI">
+                {{#if acceptingHeirs.length}}
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :EREDI ACCETTANTI
+                </p>
+                {{#each acceptingHeirs as |heir|}}
+                <div class="container">
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr style="border: none">
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        COGNOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.surname}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        NOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.firstName}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        DATA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        LUOGO DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROVINCIA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        CODICE FISCALE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.taxIdCode}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        RESIDENZA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.address}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        UTENZE TELEFONICHE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    {{#each heir.telephones as |tel|}}
+                                    <p class="regular no-margin" style="text-align: left">{{tel}}</p>
+                                    {{/each}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        GRADO DI PARENTELA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">{{heir.parentela}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROPRIETA' IMMOBILIARI
+                                    </p>
+                                </td>
+                                {{#if heir.buildings}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        PRESENTI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NON PRESENTI
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        ACCETTATA
+                                    </p>
+                                </td>
+                                {{#if heir.accettaEredita}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        SI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NO
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                {{/each}}
+                {{/if}}
+            </div>
+            {{/if}}
+
+            <!-- EREDI ACCETTANTI-->
+            {{#if (eq campaign_kind_id '700')}}
+            <div class="container" id="EREDI_ACCETTANTI">
+                {{#if acceptingHeirs.length}}
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :EREDI ACCETTANTI
+                </p>
+                {{#each acceptingHeirs as |heir|}}
+                <div class="container">
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr style="border: none">
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        COGNOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.surname}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        NOME
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.firstName}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        DATA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        LUOGO DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        PROVINCIA DI NASCITA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        CODICE FISCALE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.taxIdCode}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        RESIDENZA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">
+                                        {{heir.address}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        UTENZE TELEFONICHE
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    {{#each heir.telephones as |tel|}}
+                                    <p class="regular no-margin" style="text-align: left">{{tel}}</p>
+                                    {{/each}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        GRADO DI PARENTELA
+                                    </p>
+                                </td>
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: left">{{heir.parentela}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; background: #eeeeee">
+                                    <p class="bold no-margin" style="text-align: left">
+                                        ACCETTATA
+                                    </p>
+                                </td>
+                                {{#if heir.accettaEredita}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #008000">
+                                        SI
+                                    </p>
+                                </td>
+                                {{else}}
+                                <td style="width: 50%">
+                                    <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                                        NO
+                                    </p>
+                                </td>
+                                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                {{/each}}
+                {{/if}}
+            </div>
+            {{/if}}            
+
+            <div class="container" id="ACCETTAZIONE_EREDITA" style="margin-top: 40px;">
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+                    :ACCETTAZIONE EREDITA'
+                </p>
+                {{#if isAccettata}}
+                <p class="regular">
+                    Dalle indagini effettuate si rilevano accettazioni di eredità.
+                </p>
+
+                {{else}}
+                <p class="regular">
+                    Dalle indagini effettuate non si rilevano accettazioni di eredità e certificati di denunciata
+                    successione.
+                </p>
+                {{/if}}
+            </div>
+
+            <!-- IMMOBILI -->
+            {{#if (eq campaign_kind_id '702')}}
+            <div class="container" id="IMMOBILI">
+                <p class="bold" style="border-bottom: 2px solid #6e6e6e; margin-top: 110px;">
+                    :RICERCA IMMOBILI
+                </p>
+                {{#if buildings.find }}
+                <p class="regular">
+                    Dalla consultazione degli appositi archivi degli Uffici Catastali Divisione Territorio, sono state
+                    rilevate le
+                    seguenti
+                    proprietà immobiliari intestate al soggetto in esame. (salvo visura ipocatastale): 
+                    NB: le stime relative al valore di vendita e locazione dei beni di proprietà vengono calcolate a partire 
+                    dalle consultazioni di banche dati pubbliche, riferite al Comune di appartenenza e rapportate alla relativa 
+                    categoria catastale (qualora disponibili). Laddove la consistenza del bene non fosse espressa in mq, 
+                    la stessa viene calcolata stimando una dimensione media di 14mq per ogni vano catastale.
+                </p>
+                <br />
+                <div>
+                    <p class="bold" style="border-bottom: 1px solid #6e6e6e">DATI CATASTO UFFICIO</p>
+                    <!-- SOGGETTO -->
+                    <table style="margin-top: 5px; width: 100%; border: none !important">
+                        <tbody>
+                            <tr>
+                                <td style="border: none !important">
+                                    <p class="regular no-margin">Soggetto:</p>
+                                </td>
+                                <td style="border: none !important">
+                                    <p class="regular no-margin">{{registry.surname}} {{registry.name}}</p>
+                                </td>
+                                <td style="border: none !important">
+                                    <p class="regular no-margin">Cod.fiscale:</p>
+                                </td>
+                                <td style="border: none !important">
+                                    <p class="regular no-margin">{{registry.cf}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {{#each buildings.data.lands as |land|}}
+                    <div>
+                        <p class="bold">COMUNE: {{land.city}}</p>
+                        {{#each land.rows as |row rowId|}}
+                        <div class="container">
+                            <!-- TERRENI -->
+                            <table class="tableBuilding">
+                                <tbody>
+                                    <tr style="border: 2px solid #333;">
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Prg.</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">T</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Indirizzo</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Foglio-part-sub</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Cat.-classe-piano</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Vani</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">s.cat.</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">s.cons.</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">ha</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">are</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">ca</p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Rendita</p>
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{math @rowId "+" 1}}</p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">T</p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding"></p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">
+                                                {{row.foglio}}-{{row.particella}}-{{row.subalterno}}</p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">-{{row.classe}}-</p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding"></p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding"></p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{math row.superficieAre "+" row.superficieCentiare}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{row.superficieEttari}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{row.superficieAre}}</p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{row.superficieCentiare}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">R.D EURO:
+                                                {{row.renditaDominicale}}
+                                                (*)
+                                                R.A EURO:
+                                                {{row.renditaAgraria}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <!-- COINTESTATARI -->
+                            <table class="tableBuilding">
+                                <tbody>
+                                    <tr>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">id
+                                            </p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Intestatario
+                                            </p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Codice fiscale
+                                            </p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Tipo diritto
+                                            </p>
+                                            </td>
+                                        <th class="thBuilding">
+                                            <p class="pBuilding">Quota
+                                            </p>
+                                            </td>
+                                    </tr>
+                                    {{#each row.possessi as |owner ownerId|}}
+                                    <tr>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{math @ownerId "+" 1}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{owner.denominazione}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{owner.codiceFiscale}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">
+                                                {{owner.descrizioneTitolo}}
+                                            </p>
+                                        </td>
+                                        <td class="thBuilding">
+                                            <p class="pBuilding">{{owner.quotaOrig}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            <br>
+                            <br>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/each}}
+                    <br>
+                    {{#each buildings.data.buildings as |build|}}
+                    <div>
+                        <p class="bold">COMUNE: {{build.city}}</p>
+                        {{#each build.rows as |row rowId|}}
+                        <!-- EDIFICI -->
+                        <table class="tableBuilding">
+                            <tbody>
+                                <tr style="border: 2px solid #333;">
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Prg.
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">T
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Indirizzo
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Foglio-part-sub
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Cat.-classe-piano
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Vani
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">s.cat.
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">s.cons.
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">ha
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">are
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">ca
+                                        </p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Rendita
+                                        </p>
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{math @rowId "+" 1}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">F
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{row.indirizzo}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                            {{row.foglio}}-{{row.particella}}-{{row.subalterno}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                            {{row.codiceCategoria}}-{{row.classe}}-{{row.piano}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{row.valoreConsistenza}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{row.rendita}}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        {{#if row.estimate }}
+                        <!-- VALORIZZAZIONE -->
+                        <p class="bold" style="border-bottom: 1px solid #6e6e6e; width: 40%;">Valutazione</p>
+                        <table style="border: none !important">
+                            <tbody style="border: none !important">
+                                <tr style="border: none !important">
+                                    <td style="text-align:left; color:#1f497d !important; border: none !important">
+                                        Valore massimo:</td>
+                                    <td style="text-align:right; color:#1f497d !important; border: none !important">
+                                        {{row.stimaFabbricato.valoreMaxNormale}}
+                                    </td>
+                                </tr>
+                                <tr style="border: none !important">
+                                    <td style="text-align:left; color:#1f497d !important; border: none !important">
+                                        Valore
+                                        minimo:</td>
+                                    <td style="text-align:right; color:#1f497d !important; border: none !important">
+                                        {{row.stimaFabbricato.valoreMinNormale}}
+                                    </td>
+                                </tr>
+                                <tr style="border: none !important">
+                                    <td style="text-align:left; color:#1f497d !important; border: none !important">
+                                        Valore
+                                        riferimento compravendita:</td>
+                                    <td style="text-align:right; color:#1f497d !important; border: none !important">
+                                        {{row.stimaFabbricato.valorePuntuale}}</td>
+                                </tr>
+                                <tr style="border: none !important">
+                                    <td style="text-align:left; color:#1f497d !important; border: none !important">
+                                        Valore riferimento
+                                        locazione:</td>
+                                    <td style="text-align:right; color:#1f497d !important; border: none !important">
+                                        {{row.stimaFabbricato.valoreLocazione}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        {{/if}}
+                        <!-- COINTESTATARI -->
+                        <table class="tableBuilding">
+                            <tbody>
+                                <tr>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">id</p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Intestatario</p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Codice fiscale</p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Tipo diritto</p>
+                                        </td>
+                                    <th class="thBuilding">
+                                        <p class="pBuilding">Quota</p>
+                                        </td>
+                                </tr>
+                                {{#each row.possessi as |owner ownerId|}}
+                                <tr>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{math @ownerId "+" 1}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{owner.denominazione}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{owner.codiceFiscale}}
+                                        </p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">
+                                            {{owner.descrizioneTitolo}}</p>
+                                    </td>
+                                    <td class="thBuilding">
+                                        <p class="pBuilding">{{owner.quotaOrig}}</p>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        {{/each}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{else}}
+                <p class="regular">
+                    Dalla consultazione degli appositi archivi degli Uffici Catastali Divisione Territorio, non sono
+                    state
+                    rilevate
+                    proprietà immobiliari intestate al soggetto in esame.
+                </p>
+                {{/if}}
+                <br>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>

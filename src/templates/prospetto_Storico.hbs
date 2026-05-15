@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .content {
+      padding: 10px 20px;
+    }
+
+    .breakPage {
+      page-break-after: always;
+    }
+
+    .bold {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: bold;
+      font-family: "Calibri";
+      padding: 0 2px;
+    }
+
+    .regular {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: normal;
+      font-family: "Calibri";
+      padding: 0 10px;
+    }
+
+    .no-margin {
+      margin: 0;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    .container__title {
+      text-align: end;
+      width: 100%;
+      border-bottom: 2px solid #6e6e6e;
+    }
+
+    .container__title__title {
+      color: #023671;
+      font-size: 24pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    h1.container__title__title {
+      margin-bottom: 4px !important;
+    }
+
+    h3.container__title__subtitle {
+      margin-top: 4px !important;
+    }
+
+    .container__title__subtitle {
+      color: #023671;
+      font-size: 16pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    .cellSx {
+      text-align: center;
+      background-color: #eeeeee !important;
+      width: 50%;
+    }
+
+    .cellDx {
+      text-align: center;
+      width: 50%;
+    }
+
+    table {
+      border: 1px solid #333;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid #333;
+    }
+
+    /* NB */
+
+    .container__nb {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    .container {
+      page-break-inside: avoid;
+    }
+
+    /* INDICE */
+
+    .container__contenuti {
+      padding-top: 0pt;
+      padding-bottom: 0;
+    }
+
+    .container__inner_contenuti {
+      padding: 1rem;
+    }
+
+    .contentuti__row {
+      display: flex;
+      width: 100%;
+    }
+
+    .contenuti__row__sx {
+      width: 100%;
+      border-bottom: 1px dotted #ccc;
+    }
+
+    .contenuti__row__dx {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* PIE CHART */
+
+    .pie-chart {
+      --size: 15rem;
+      --fg: #369;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      color: var(--fg);
+    }
+
+    .pie-chart .divider {
+      height: 50%;
+      left: 50%;
+      margin-left: -1px;
+      position: absolute;
+      top: 0;
+      transform-origin: 0 100%;
+      transform: rotate(calc(1turn * (var(--precent) / 100)));
+      width: 2px;
+    }
+
+    /* get by script */
+    .table3 {
+      position: relative;
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      /*  border: 1px solid white; */
+    }
+
+    .table3 th {
+      color: black;
+    }
+
+    .table3 td {
+      color: rgb(0, 0, 0);
+    }
+
+    .table3 th,
+    .table3 td {
+      border: none;
+      /*  border: 1px solid rgb(255, 255, 255); */
+      /* Aggiunge un bordo alle celle */
+      font-size: 9px;
+      /* white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+    }
+
+    .bkT2 {
+      border: none;
+      background-color: #023671;
+      color: rgba(255, 255, 255, 0.925);
+    }
+
+    .bkT1 {
+      border: none;
+      background-color: #023671;
+      color: rgba(255, 255, 255, 0.932);
+    }
+
+    .regular__min {
+      text-align: justify;
+    }
+
+    .tableBuilding {
+      width: 100%;
+      border: 0.5px solid black !important;
+    }
+
+    .thBuilding {
+      text-align: center;
+      border: 0.5px solid black !important;
+    }
+
+    .pBuilding {
+      color: #1f497d !important;
+      font-size: x-small;
+    }
+
+    .container-table {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="container">
+      <div class="container__title">
+        <h3 class="container__title__subtitle"> SCHEDA IMPRESA ORDINARIA </h3>
+        <h1 class="container__title__title">{{registry.businessName}}</h1>
+      </div>
+    </div>
+    <p class="bold no-margin">Allegato Informazione n. {{informazioneN}}</p>
+    <div id="DATI_ANAGRAFICI_CARATTERISTICI">
+      <div class="container">
+        <p class="bold" style="border-bottom: 2px solid #6e6e6e">DATI ANAGRAFICI E CARATTERISTICI</p>
+        <!-- TABELLA -->
+        <div class="container">
+          <table style="width: 100%; border: none !important">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Ragione Sociale:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.businessName}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Cod. Fiscale:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.taxCode}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Partita IVA:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.iva}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Cod.CCIAA/N.REA:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.codeREAWithProvince}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Sede:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{registry.site}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Forma giuridica:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.legalForm}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Stato società:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.stateOfCompany}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Data inizio attività:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.startCompanyDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Capitale sociale:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.authorizedSocialCapital}} €</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Attività:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{registry.naceCode}} - {{registry.activity}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Attività svolta normalizzata:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" style="width: 90%; word-wrap: break-word;">
+                    {{registry.performedActivity}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice RAE:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{registry.raeCode}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice SAE:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{registry.saeCode}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice NACE:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{registry.naceCode}} - {{registry.activity}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Email certiﬁcata:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.certifiedEmail}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- ULTERIORI INFORMAZIONI -->
+        <p class="bold" style="margin-top: 30px;">Ulteriori informazioni</p>
+        <table style="width: 50%; border: none !important;">
+          <tbody>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.addetti:</p>
+              </td>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{annualEmployees.employeeIndipendentNumber}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.soci:</p>
+              </td>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{members.length}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.amministratori:</p>
+              </td>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{administration.numberOfAdministration}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.titolari di cariche:</p>
+              </td>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{exponents.length}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.sindaci:</p>
+              </td>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{countOfMayors}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">N.trasferimenti di sede:</p>
+              </td>
+              <td style="border: none !important">
+                {{!-- <p class="regular no-margin">{{administration.numberOfAdministration}}</p> --}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- DATI LEGALI -->
+        <div>
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">DATI LEGALI</p>
+          <p class="bold">Iscrizione al registro imprese</p>
+          <table style="width: 50%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Cod. fiscale e N. iscrizione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.taxCode}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Sede registro imprese:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{legalData.companyRegisterBusiness}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Data iscrizione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{legalData.dateIscription}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Sezione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold regular no-margin">{{legalData.section}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Data iscrizione alla sezione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{legalData.dateForTheSection}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- INFO DA STATUTO -->
+          <p class="bold" style="margin-top: 20px;">Informazioni da statuto</p>
+          <table style="width: 100%; border: none !important; margin-top: 20px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Data costituzione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{informationStatute.dateCostitution}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Oggetto sociale:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" style="width: 90%; word-wrap: break-word;">
+                    {{informationStatute.socialObject}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Data termine:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{informationStatute.endDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Patti sociali:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{informationStatute.socialPacts}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Altri riferimenti statuari:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    <span class="bold">{{informationStatute.withdrawalClauses.title}} </span> <br>
+                    {{informationStatute.withdrawalClauses.text}} <br>
+
+                    <span class="bold">{{informationStatute.preEmptionClauses.title}} </span> <br>
+                    {{informationStatute.preEmptionClauses.text}} <br>
+
+                    <span class="bold">{{informationStatute.exclusionClauses.title}} </span> <br>
+                    {{informationStatute.exclusionClauses.text}}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Anno di primo esercizio:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{informationStatute.dateOfIncorporation}}</p>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <!-- INFORMAZIONI SULLA SEDE -->
+          <p class="bold">Informazioni sulla sede</p>
+          <table style="width: 50%; border: none !important; margin-top: 20px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Numero REA:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.codeREA}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--CAPITALI E STRUMENTI FINANZIARE -->
+          <p class="bold">Capitali e strumenti finanziari</p>
+          <table style="width: 50%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Tipo conferimento:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.typeOfContribution}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Capitale sociale deliberato:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.authorizedSocialCapital}} {{registry.eu}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Capitale sociale sottoscritto:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.subscribedSocialCapital}} {{registry.eu}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Capitale sociale versato</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.paidUpSocialCapital}} {{registry.eu}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--SISTEMA DI AMMINISTRAZIONE E CONTROLLO -->
+          <p class="bold">Sistema di amministrazione e controllo</p>
+          <table style="width: 50%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Forma amministrativa:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{administration.form}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Sistema di amministrazione:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{administration.systemOfAdministration}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Forma amministrativa in carica:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{administration.administrationForm}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">N. amministratori in carica:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{administration.numberOfAdministration}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- EVENTI LEGALI -->
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">EVENTI LEGALI</p>
+          <p class="bold">Trasferimento di proprietà e godimento d'azienda</p>
+          <table style="width: 80%; border: none !important; margin-top: 40px">
+            <tbody>
+            <tbody>
+              <tr>
+                <td style="border: none !important; background-color: #eeeeee;">
+                  <p class="regular no-margin">Compravendita:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Data atto:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.actDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Data deposito:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.filingDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Data protocollo:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.protocolDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">N. protocollo:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.numberProtocol}}</p>
+                </td>
+              </tr>
+              <!-- Estremi dell'atto -->
+              <tr>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Estremi dell'atto:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Notaio:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.notary}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">N. repertorio:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.referenceNo}}</p>
+                </td>
+              </tr>
+              <!-- Cedente -->
+              <tr>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Cedente:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Denominazione Denunciata:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.denominationReported}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Soggetto:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.subjectAssignor}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">P.IVA/ Cod. Fisc:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.taxCodeAssignor}}</p>
+                </td>
+              </tr>
+              <!-- Cessionario -->
+              <tr>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Cessionario:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Cessionario:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.transferee}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">Soggetto:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.subjectTransferee}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important;"></td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">P.IVA/ Cod. Fisc:</p>
+                </td>
+                <td style="border: none !important;">
+                  <p class="regular no-margin">{{legalEvents.taxCodeTransferee}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- BILANCIO -->
+        {{#if balance.referenceYears.length}}
+                <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+            BILANCIO
+          </p>
+          <p class="regular">
+            I dati di bilancio riportati sono tratti dai documenti originali depositati dall'impresa in camera di
+            commercio in conformità alla quarta direttiva CEE. In particolare:il valore della produzione e' costituito
+            dalle seguenti voci (qualora specificate): ricavi delle vendite e delle prestazioni, variazioni delle
+            rimanenze di prodotti in lavorazione, semilavorati e finiti, variazioni dei lavori in corso, Incrementi di
+            immobilizzazioni per lavori interni, altri ricavi e proventi. Il fatturato s'intende dato dalle seguenti
+            voci:
+            Industriali,Commerciali e di Servizi: Ricavi delle Vendite e delle Prestazioni; Pluriennali: Ricavi delle
+            Vendite e delle Prestazioni + Variazioni dei Lavori in corso.
+          </p>
+          <p class="bold">Sintesi bilancio</p>
+          <table style="border-spacing: 10px; border: none !important">
+            <thead style="border: none !important">
+              <tr style="border: none !important">
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Voce di bilancio</p>
+                </th>
+                {{#if balance.referenceYears.[2]}}
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Importo {{balance.referenceYears.[2]}}</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Var %</p>
+                </th>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Importo {{balance.referenceYears.[1]}}</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Var %</p>
+                </th>
+                {{/if}}
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Importo {{balance.referenceYears.[0]}}</p>
+                </th>
+              </tr>
+              <tr>
+                <th style="border: none !important"></th>
+                <th style="border: none !important"></th>
+                {{#if balance.referenceYears.[2]}}
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">{{balance.referenceYears.[2]}}/{{balance.referenceYears.[1]}}</p>
+                </th>
+                <th style="border: none !important"></th>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">{{balance.referenceYears.[1]}}/{{balance.referenceYears.[0]}}</p>
+                </th>
+                {{/if}}
+              </tr>
+            </thead>
+            <tbody style="border: none !important">
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">Valore della produzione</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].productionValue}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[1].productionValue.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].productionValue}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[0].productionValue.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].productionValue}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">Ricavi</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].revenues}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].revenues.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].revenues}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[0].revenues.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].revenues}}</p>
+                </td>
+              </tr>
+
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin no-padding">Fatturato</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].sales}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[1].sales.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].sales}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[0].sales.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].sales}}</p>
+                </td>
+              </tr>
+
+
+
+
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">Cash-flow</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].cashFlow}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].cashFlow.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].cashFlow}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[0].cashFlow.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].cashFlow}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">utile/Perdita</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].profitLoss}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].profitLoss.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].profitLoss}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[0].profitLoss.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].profitLoss}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">Attivo</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].active}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].active.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].active}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[0].active.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].active}}</p>
+              </tr>
+                </td>
+
+
+
+              <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="regular no-margin no-padding">Credito verso soci</p>
+                  </td>
+                  {{#if balance.referenceYears.[2]}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{balance.balanceDetails.[2].creditToMembers}}</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin" >
+                      {{balance.balanceDetailsPercentage.[1].creditToMembers.value}}</p>
+                  </td>
+                  {{/if}}
+                  {{#if balance.referenceYears.[1]}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{balance.balanceDetails.[1].creditToMembers}}</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{balance.balanceDetailsPercentage.[0].creditToMembers.value}}</p>
+                  </td>
+                  {{/if}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{balance.balanceDetails.[0].creditToMembers}}</p>
+                  </td>
+                </tr>
+
+
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin no-padding">Immobilizzazioni</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].fixedAssets}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].fixedAssets.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].fixedAssets}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">
+                    {{balance.balanceDetailsPercentage.[0].fixedAssets.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].fixedAssets}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin">Patrimonio netto</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].netAssets}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].netAssets.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].netAssets}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[0].netAssets.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].netAssets}}</p>
+                </td>
+              </tr>
+
+
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin no-padding">TFR</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].tfr}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[1].tfr.value}}</p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].tfr}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin" >
+                    {{balance.balanceDetailsPercentage.[0].tfr.value}}</p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].tfr}}</p>
+                </td>
+              </tr>
+
+
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin no-padding">Numero dipendenti</p>
+                </td>
+                {{#if balance.referenceYears.[2]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[2].numberOfEmployees}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"></p>
+                </td>
+                {{/if}}
+                {{#if balance.referenceYears.[1]}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[1].numberOfEmployees}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"></p>
+                </td>
+                {{/if}}
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{balance.balanceDetails.[0].numberOfEmployees}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{else}}
+        {{!-- {{else}}
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+            BILANCIO
+          </p>
+          <p class="regular">
+            A seguito delle indagini condotte é emerso che la società non ha mai depositato alcun bilancio
+          </p>
+        </div> --}}
+        {{/if}}
+        <!-- ESPONENTI -->
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">ESPONENTI</p>
+          {{#each exponents as |exponent|}}
+          <p class="bold">{{exponent.lastName}} {{exponent.firstName}}</p>
+          <div class="container container-table">
+            <table style="width: 50%; border: none !important; margin-top: 40px">
+              <thead>
+                <tr>
+                  <th style="border: none !important;">
+                    <p class="bold no-margin">Dati Anagrafici</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Cod. Fiscale:</p>
+                    <p class="regular no-margin">Nato A:</p>
+                    <p class="regular no-margin">Residenza:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin"> {{exponent.taxCode}}</p>
+                    <p class="regular no-margin"> {{exponent.placeOfBirth}}</p>
+                    <p class="regular no-margin"> {{exponent.residence}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table style="width: 50%; border: none !important; margin-top: 40px">
+              <thead>
+                <tr>
+                  <th style="border: none !important;">
+                    <p class="bold no-margin">Cariche ricoperte</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each exponent.positionHeld as |pos|}}
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Carica:</p>
+                  </td>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">{{pos.position}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Dal:</p>
+                  </td>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">{{pos.positionFrom}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Nominato con atto del:</p>
+                  </td>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">{{pos.appointedDeedOf}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Durata carica:</p>
+                  </td>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">{{pos.durationPosition}}</p>
+                  </td>
+                </tr>
+                {{#if (eq pos.position 'Amministratore Unico')}}
+                <tr>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">Dt presentazione atto:</p>
+                  </td>
+                  <td style="border: none !important;">
+                    <p class="regular no-margin">{{pos.actSubmissionDate}}</p>
+                    <!-- Assuming you have a variable for this -->
+                  </td>
+                </tr>
+                {{/if}}
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+          {{/each}}
+
+        </div>
+        <!-- CARATTERISTICHE ATTIVITA' -->
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">CARATTERISTICHE ATTIVITA'</p>
+          <p class="bold">Come opera</p>
+          <table style="width: 100%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Attività primaria dichiarata:</p>
+                </td>
+                <td class="regular" style="border: none !important; width: 100%; word-wrap: break-word;">
+                  {{registry.performedActivity}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="bold">{{lifeTimeClassification}} (informazione di sola natura statistica Fonte Agenzia
+            delle entrate )</p>
+          <table style="border-spacing: 10px; border: none !important">
+            <thead style="border: none !important">
+              <tr style="border: none !important">
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Codice</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Descrizione attivita'</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Importanza</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Data</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody style="border: none !important">
+              {{#each activityCharacteristics as |act|}}
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{act.naceCode}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{act.activity}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{act.importance}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"></p>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
+          <table style="width: 50%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice RAE</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{registry.raeCode}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice SAE</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{registry.saeCode}}</p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice NACE</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{registry.naceCode}} - {{registry.activity}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- DIPENDENTI -->
+          <p class="bold" style="margin-top: 30px;">Dipendenti</p>
+          <table style="width: 50%; border: none !important; margin-top: 20px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">N. dipendenti:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{annualEmployees.employeeNumber}}</p>
+                </td>
+              </tr>
+              <tr>
+
+                <td style="border: none !important">
+                  <p class="regular no-margin">Anno:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{annualEmployees.workforce.year}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">N. addetti indipendenti:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{annualEmployees.employeeIndipendentNumber}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- DIPENDENTI PER ANNO -->
+          <div class="container">
+            <p class="bold" style="border-bottom: 1px solid #6e6e6e">
+              Dipendenti per anno
+            </p>
+            <p class="bold" style="margin-top: 1px; text-align: center">
+              Anno {{annualEmployees.workforce.year}}
+            </p>
+            <table style="border-spacing: 10px; border: none !important; width: 100%">
+              <thead style="border: none !important">
+                <tr style="border: none !important">
+                  <th style="border: none !important">
+                    <p class="bold no-margin"></p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">I TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">II TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">III TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">IV TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">MEDIA</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="border: none !important">
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Dipendenti</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{employee}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.workforce.average.employee}}
+                    </p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Autonomi</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{autonomous}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.workforce.average.autonomous}}
+                    </p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Addetti</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{total}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{annualEmployees.workforce.average.total}}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="bold" style="margin-top: 30px; text-align: center">
+              {{annualEmployees.territorialWorkforce.municipality}}
+            </p>
+            <table style="border-spacing: 10px; border: none !important; width: 100%">
+              <thead style="border: none !important">
+                <tr style="border: none !important">
+                  <th style="border: none !important">
+                    <p class="bold no-margin"></p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">I TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">II TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">III TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">IV TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">MEDIA</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="border: none !important">
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Dipendenti</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{employee}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.employee}}</p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Autonomi</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{autonomous}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.autonomous}}</p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Addetti</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{total}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.total}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- SOCI -->
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">SOCI</p>
+          <p class="regular">Le quote riportate si riferiscono all'elenco Soci al {{membersInfo.dateListOfMembers}}
+            depositato il
+            {{membersInfo.dateStorageMembers}} con capitale sociale di {{registry.authorizedSocialCapital}}
+            {{registry.euro}}
+            {{!-- e consolidato in base all'ultimo
+            trasferimento in data {{membersInfo.dateStorageMembers}} . --}}
+          </p>
+
+
+          <table style="border-spacing: 10px; border: none !important">
+            <thead style="border: none !important">
+              <tr style="border: none !important">
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Socio</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">N. quote</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Tipo azioni /quote</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Valore nominale</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">% Quote</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Tipo Di diritto</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody style="border: none !important">
+              {{#each members as |member|}}
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{member.firstName}} {{member.lastName}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{member.nominalValue}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{member.percentageShares}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> {{member.typeOfRight}}</p>
+                </td>
+              </tr>
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin">Indirizzo {{member.site}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+              </tr>
+
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="regular no-margin">Codice Fiscale: {{member.taxCode}}</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"></p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
+          {{!-- PARTE COMMENTATA SICCOME NON E' ANCORA POSSIBILE REPERIRE I DATI DELLA COMPRAVENDITA --}}
+
+
+          {{!-- <p class="bold">Variazioni sulle quote sociali che hanno prodotto l'Elenco Soci sopra riportato</p>
+          <p class="bold">con atto del {{membersInfo.dateListOfMembers}} depositato il
+            {{membersInfo.dateStorageMembers}} con protocollo {{membersInfo.protocolNumber}}</p>
+
+          <p class="bold">COMPRAVENDITA</p>
+
+          <table style="width: 50%; border: none !important; margin-top: 40px">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Valore nominale:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.authorizedSocialCapital}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Valore versato:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{registry.paidUpSocialCapital}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none !important">
+                  <p class="bold no-margin">Cedente:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Nome</p>
+                  <p class="regular no-margin">Codice Fiscale</p>
+                  <p class="regular no-margin">Tipo diritto</p>
+                  <p class="regular no-margin">Indirizzo</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                </td>
+              <tr>
+                <td style="border: none !important">
+                  <p class="bold no-margin">Acquirente:</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin">Nome</p>
+                  <p class="regular no-margin">Codice Fiscale</p>
+                  <p class="regular no-margin">Tipo diritto</p>
+                  <p class="regular no-margin">Indirizzo</p>
+                </td>
+                <td style="border: none !important">
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                  <p class="regular no-margin"> </p>
+                </td>
+              </tr>
+
+            </tbody>
+          </table> --}}
+
+
+
+        </div>
+        <!-- INTERROGAZIONI -->
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">INTERROGAZIONI</p>
+          <table style="width:40%;border-spacing: 10px; border: none !important">
+            <thead style="border: none !important">
+              <tr style="border: none !important">
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Anno</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Mese</p>
+                </th>
+                <th style="background-color: #eeeeee; border: none !important">
+                  <p class="bold no-margin">Numero</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody style="border: none !important">
+              {{#each questions as |ques|}}
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin" style="text-align: center;"> {{ques.year}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin" style="text-align: center;">{{ques.month}} </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin" style="text-align: center;">{{ques.number}} </p>
+                </td>
+              </tr>
+              {{/each}}
+              {{!-- <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+              </tr>
+              <tr style="border: none !important">
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+                <td style="border: none !important">
+                  <p class="bold no-margin"> </p>
+                </td>
+              </tr> --}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+</body>
+
+</html>

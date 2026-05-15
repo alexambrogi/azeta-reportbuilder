@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .content {
+      padding: 10px 20px;
+    }
+
+    .breakPage {
+      page-break-after: always;
+    }
+
+    .bold {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: bold;
+      font-family: "Calibri";
+      padding: 0 2px;
+    }
+
+    .regular {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: normal;
+      font-family: "Calibri";
+      padding: 0 10px;
+    }
+
+    .no-margin {
+      margin: 0;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    .container__title {
+      text-align: end;
+      width: 100%;
+      border-bottom: 2px solid #6e6e6e;
+    }
+
+    .container__title__title {
+      color: #023671;
+      font-size: 24pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    h1.container__title__title {
+      margin-bottom: 4px !important;
+    }
+
+    h3.container__title__subtitle {
+      margin-top: 4px !important;
+    }
+
+    .container__title__subtitle {
+      color: #023671;
+      font-size: 16pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    .cellSx {
+      text-align: center;
+      background-color: #eeeeee !important;
+      width: 50%;
+    }
+
+    .cellDx {
+      text-align: center;
+      width: 50%;
+    }
+
+    table {
+      border: 1px solid #333;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid #333;
+    }
+
+    /* NB */
+
+    .container__nb {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    .container {
+      page-break-inside: avoid;
+    }
+
+    /* INDICE */
+
+    .container__contenuti {
+      padding-top: 0pt;
+      padding-bottom: 0;
+    }
+
+    .container__inner_contenuti {
+      padding: 1rem;
+    }
+
+    .contentuti__row {
+      display: flex;
+      width: 100%;
+    }
+
+    .contenuti__row__sx {
+      width: 100%;
+      border-bottom: 1px dotted #ccc;
+    }
+
+    .contenuti__row__dx {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* PIE CHART */
+
+    .pie-chart {
+      --size: 15rem;
+      --fg: #369;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      color: var(--fg);
+    }
+
+    .pie-chart .divider {
+      height: 50%;
+      left: 50%;
+      margin-left: -1px;
+      position: absolute;
+      top: 0;
+      transform-origin: 0 100%;
+      transform: rotate(calc(1turn * (var(--precent) / 100)));
+      width: 2px;
+    }
+
+    /* get by script */
+    .table3 {
+      position: relative;
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      /*  border: 1px solid white; */
+    }
+
+    .table3 th {
+      color: black;
+    }
+
+    .table3 td {
+      color: rgb(0, 0, 0);
+    }
+
+    .table3 th,
+    .table3 td {
+      border: none;
+      /*  border: 1px solid rgb(255, 255, 255); */
+      /* Aggiunge un bordo alle celle */
+      font-size: 9px;
+      /* white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+    }
+
+    .bkT2 {
+      border: none;
+      background-color: #023671;
+      color: rgba(255, 255, 255, 0.925);
+    }
+
+    .bkT1 {
+      border: none;
+      background-color: #023671;
+      color: rgba(255, 255, 255, 0.932);
+    }
+
+    .regular__min {
+      text-align: justify;
+    }
+
+    .tableBuilding {
+      width: 100%;
+      border: 0.5px solid black !important;
+    }
+
+    .thBuilding {
+      text-align: center;
+      border: 0.5px solid black !important;
+    }
+
+    .pBuilding {
+      color: #1f497d !important;
+      font-size: x-small;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <!-- INPUT -->
+    <div class="container">
+      <div class="container__title">
+        {{#if nomeDocumento}}
+          <h1 class="container__title__title">{{nomeDocumento}}</h1>
+        {{else}}
+          {{#if (eq campaign_kind_id '711')}}
+          <h1 class="container__title__title">Money Light</h1>
+          {{/if}}
+        {{/if}}
+        <h3 class="container__title__subtitle">
+          Persona giuridica corporate
+        </h3>
+      </div>
+      <table style="width: 100%; margin-top: 50px">
+        <thead>
+          <th colspan="2">
+            <p class="bold no-margin" style="text-align: center">
+              {{registry.businessName}}
+            </p>
+          </th>
+        </thead>
+        <tbody>
+          <tr style="border: none">
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                INFORMAZIONE N°
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{informazioneN}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                RIF. CLIENTE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                DATA RICHIESTA
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{inputData.dateOfRequest}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                DATA EVASIONE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{inputData.releaseDate}}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="width: 100%; margin-top: 50px">
+        <thead>
+          <th colspan="2">
+            <p class="bold no-margin" style="text-align: center">
+              DATI INPUT
+            </p>
+          </th>
+        </thead>
+        <tbody>
+          <tr style="border: none">
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                DENOMINAZIONE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.businessName}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                CODICE FISCALE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.taxCode}}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                P.IVA
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.iva}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                SEDE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.site}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                INDIRIZZO
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.site}}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                NOME PRODOTTO
+              </p>
+            </td>
+            {{#if nomeDocumento}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center">
+                  {{nomeDocumento}}
+                </p>
+              </td>          
+            {{/if}}            
+            {{#if (eq campaign_kind_id '711')}}
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                MONEY LIGHT
+              </p>
+            </td>
+            {{/if}}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- N.B. -->
+    <div class="container__nb breakPage">
+      <span class="bold">N.B.</span>
+      <p class="regular__min" style="font-size: 8pt">
+        Le informazioni ed i dati forniti dalla nostra azienda alla propria
+        clientela, sono raccolti e trattati secondo quanto disposto dal D.
+        Lgs. 196 del 2003 e dal nuovo RE 679/2016. I clienti possono quindi
+        utilizzare i dati e le informazioni fornite secondo le modalità
+        previste dalla legge per la tutela dei propri diritti. L’informazione
+        ha natura strettamente riservata, personale e confidenziale, pertanto
+        non può essere divulgata a terzi e tantomeno in sede giudiziaria in
+        quanto le informazioni presenti non sono supportate da prove
+        documentali. Ci esimiamo da qualsiasi responsabilità consequenziale,
+        di natura civile, penale derivanti da dette violazioni. E’ sin da ora
+        escluso qualunque titolo e motivo di azione di rivalsa per le notizie
+        fornite.
+      </p>
+    </div>
+    <!-- INDICE -->
+    <div class="container__contenuti breakPage">
+      <p class="bold">Contenuti</p>
+      <div class="container__inner_contenuti">
+        <a href="#RIEPILOGO_INDAGINE" style="text-decoration: none">
+          <div class="contentuti__row">
+            <div class="contenuti__row__sx">
+              <p class="regular" style="font-size: 10pt;">RIEPILOGO INDAGINE</p>
+            </div>
+            <div class="contenuti__row__dx">
+              <span class="regular" id="indice_riepilogo_indagine"style="display:none">::RIEPILOGO_INDAGINE</span>
+            </div>
+          </div>
+        </a>
+        {{#if (ne campaign_kind_id '792G')}}
+          <a href="#ANAGRAFICA_IMPRESA" style="text-decoration: none">
+            <div class="contentuti__row">
+              <div class="contenuti__row__sx">
+                <p class="regular" style="font-size: 10pt;">ANAGRAFICA IMPRESA</p>
+              </div>
+              <div class="contenuti__row__dx">
+                <span class="regular"style="display:none">::ANAGRAFICA_IMPRESA</span>
+              </div>
+            </div>
+          </a>
+        {{/if}}
+        <a href="#RAPPORTI_BANCARI" style="text-decoration: none">
+          <div class="contentuti__row">
+            <div class="contenuti__row__sx">
+              <p class="regular" style="font-size: 10pt;">RAPPORTI BANCARI</p>
+            </div>
+            <div class="contenuti__row__dx">
+              <span class="regular"style="display:none">::RAPPORTI_BANCARI</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- RIEPILOGO INDAGINE -->
+    <div class="container_riepilogo_indagine breakPage" id="RIEPILOGO_INDAGINE">
+      <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+        :RIEPILOGO INDAGINE
+      </p>
+      <!-- TABELLA -->
+      <table style="width: 100%; margin-top: 40px">
+        <thead>
+          <th colspan="2">
+            <p class="bold no-margin" style="text-align: center">
+              {{registry.businessName}}
+            </p>
+          </th>
+        </thead>
+        <tbody>
+          {{#if (ne campaign_kind_id '792G')}}
+            <tr style="border: none">
+              <td style="width: 50%; background: #eeeeee">
+                <a href="#ANAGRAFICA_IMPRESA" style="text-decoration: none">
+                  <p class="bold no-margin" style="text-align: center">
+                    ANAGRAFICA IMPRESA
+                  </p>
+                </a>
+              </td>
+              {{#if registry}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #008000">
+                  PRESENTE
+                </p>
+              </td>
+              {{else}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                  NON PRESENTE
+                </p>
+              </td>
+              {{/if}}
+            </tr>
+          {{/if}}
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <a href="#RAPPORTI_BANCARI" style="text-decoration: none">
+                <p class="bold no-margin" style="text-align: center">
+                  RAPPORTI BANCARI
+                </p>
+              </a>
+            </td>
+            {{#if bankingRelationships.length}}
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center; color: #008000">
+                PRESENTE
+              </p>
+            </td>
+            {{else}}
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                NON PRESENTE
+              </p>
+            </td>
+            {{/if}}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {{#if (ne campaign_kind_id '792G')}}
+      <div id="ANAGRAFICA_IMPRESA">
+        <div class="container">
+          <p class="bold" style="border-bottom: 2px solid #6e6e6e">:ANAGRAFICA</p>
+          <!-- TABELLA -->
+          <div class="container">
+            <table style="width: 100%; border: none !important">
+              <tbody>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Ragione Sociale:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.businessName}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Cod. Fiscale:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.taxCode}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Partita IVA:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.iva}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Cod.CCIAA/N.REA:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.codeREA}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Sede:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{registry.site}}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Forma giuridica:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.legalForm}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Stato società:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.stateOfCompany}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Data inizio attività:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.startCompanyDate}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Capitale sociale:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.socialCapital}}€</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Attività:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{registry.activity}}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Codice RAE:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{registry.raeCode}}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Codice SAE:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{registry.saeCode}}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Codice NACE:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">
+                      {{registry.naceCode}}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Email certiﬁcata:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.certifiedEmail}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Data costituzione:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.dateIncorporation}}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">Data termine:</p>
+                  </td>
+                  <td style="border: none !important">
+                    <p class="regular no-margin">{{registry.expectedEndDate}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {{#if (ne campaign_kind_id '792G')}}
+            <!-- SISTEMA AMMINISTRAZIONE -->
+            {{#if administration.systemOfAdministration}}
+            <div class="container">
+              <p class="bold">Sistema di amministrazione e controllo</p>
+              <table style="width: 50%; border: none !important; margin-top: 40px">
+                <tbody>
+                  <tr>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">Forma amministrativa:</p>
+                    </td>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">{{administration.form}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">Sistema di amministrazione:</p>
+                    </td>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">{{administration.systemOfAdministration}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">Forma amministrativa in carica:</p>
+                    </td>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">{{administration.administrationForm}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">N.amministratori in carica:</p>
+                    </td>
+                    <td style="border: none !important">
+                      <p class="regular no-margin">{{administration.numberOfAdministration}}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            {{/if}}
+          {{/if}}
+        </div>
+        {{#if (ne campaign_kind_id '792G')}}
+          <!-- DIPENDENTI PER ANNO -->
+          <div class="container">
+            <p class="bold" style="border-bottom: 1px solid #6e6e6e">
+              Dipendenti per anno
+            </p>
+            <p class="bold" style="margin-top: 1px; text-align: center">
+              Anno {{annualEmployees.workforce.year}}
+            </p>
+            <table style="border-spacing: 10px; border: none !important; width: 100%">
+              <thead style="border: none !important">
+                <tr style="border: none !important">
+                  <th style="border: none !important">
+                    <p class="bold no-margin"></p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">I TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">II TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">III TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">IV TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">MEDIA</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="border: none !important">
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Dipendenti</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{employee}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{annualEmployees.workforce.average.employee}}
+                    </p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Autonomi</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{autonomous}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{annualEmployees.workforce.average.autonomous}}
+                    </p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Addetti</p>
+                  </td>
+                  {{#annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{total}}</p>
+                  </td>
+                  {{/annualEmployees.workforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{annualEmployees.workforce.average.total}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="bold" style="margin-top: 30px; text-align: center">
+              {{annualEmployees.territorialWorkforce.municipality}}
+            </p>
+            <table style="border-spacing: 10px; border: none !important; width: 100%">
+              <thead style="border: none !important">
+                <tr style="border: none !important">
+                  <th style="border: none !important">
+                    <p class="bold no-margin"></p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">I TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">II TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">III TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">IV TRIM</p>
+                  </th>
+                  <th style="background-color: #eeeeee; border: none !important">
+                    <p class="bold no-margin">MEDIA</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="border: none !important">
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Dipendenti</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{employee}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.employee}}</p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Autonomi</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{autonomous}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.autonomous}}</p>
+                  </td>
+                </tr>
+                <tr style="border: none !important">
+                  <td style="border: none !important">
+                    <p class="bold no-margin">Addetti</p>
+                  </td>
+                  {{#annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">{{total}}</p>
+                  </td>
+                  {{/annualEmployees.territorialWorkforce.periodList}}
+                  <td style="border: none !important">
+                    <p class="regular no-margin" style="text-align: center">
+                      {{annualEmployees.territorialWorkforce.average.total}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
+    <div class="container" id="RAPPORTI_BANCARI">
+      <p class="bold" style="border-bottom: 2px solid #6e6e6e; margin-top: 40px;">
+        :RAPPORTI BANCARI
+      </p>
+      {{#if bankingRelationships.length}}
+      <p class="regular">A seguito delle indagini condotte abbiamo constatato che il richiesto è titolare di conto
+        corrente presso i seguenti
+        Istituti di Credito
+      </p>
+      {{else}}
+      <p class="regular">A seguito delle indagini condotte abbiamo constatato che il richiesto non è titolare di alcun
+        rapporto di conto corrente
+        bancario e/o postale
+      </p>
+      {{/if}}
+      {{#if bankingRelationships.length}}
+      {{#each bankingRelationships}}
+      <p class="bold" style="border-bottom: 2px solid #6e6e6e; margin-top: 40px;">
+        {{this.businessName}} - CONTO CORRENTE - {{this.city}}
+      </p>
+      <table style="width: 100%; border: none !important">
+        <tbody>
+          <tr>
+            <td style="border: none !important">
+              <p class="bold no-margin">CODICE FISCALE</p>
+            </td>
+            <td style="border: none !important">
+              <p class="regular no-margin">{{this.piva}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="border: none !important">
+              <p class="bold no-margin">ABI</p>
+            </td>
+            <td style="border: none !important">
+              <p class="regular no-margin">{{this.abi}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="border: none !important">
+              <p class="bold no-margin">CAB</p>
+            </td>
+            <td style="border: none !important">
+              <p class="regular no-margin">{{this.cab}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="border: none !important">
+              <p class="bold no-margin">INDIRIZZO</p>
+            </td>
+            <td style="border: none !important">
+              <p class="regular no-margin">{{this.address}}</p>
+            </td>
+          </tr>
+          {{#if this.note}}
+          <tr>
+            <td style="border: none !important">
+              <p class="bold no-margin">NOTE</p>
+            </td>
+            <td style="border: none !important">
+              <p class="regular no-margin">{{this.note}}</p>
+            </td>
+          </tr>
+          {{/if}}
+        </tbody>
+      </table>
+      {{/each}}
+        {{#if (ne campaign_kind_id '792G')}}
+          <p class="regular"> <span class="bold">Movimentazione: </span>Non si rilevano indicazioni circa l’andamento
+            attuale
+          </p>
+          <p class="regular"> <span class="bold">Criticità: </span>Non è stato possibile determinare se vi siano delle
+            criticità sulla gestione ordinaria.
+          </p>
+          <p class="regular"> <span class="bold">Accrediti: </span>Non è stato possibile determinare se vi siano accrediti
+            periodici.
+          </p>
+          <p class="regular">Si consiglia di agire tempestivamente nell’utilizzo delle suddette informazioni</p>
+        {{/if}}    
+      {{/if}}
+    </div>
+  </div>
+</body>
+
+</html>

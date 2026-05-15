@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .breakPage {
+      page-break-after: always;
+    }
+
+    .bold {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: bold;
+      font-family: "Calibri";
+      padding: 0 10px;
+    }
+
+    .regular {
+      color: #1f497d;
+      font-size: 12pt;
+      font-weight: normal;
+      font-family: "Calibri";
+      padding: 0 10px;
+    }
+
+    .no-margin {
+      margin: 0;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    .regular__min {
+      color: #1f497d;
+      font-size: 10pt;
+      font-weight: normal;
+      font-family: "Calibri";
+      padding: 0 10px;
+    }
+
+    .container {
+      page-break-inside: avoid;
+    }
+
+    .containerPadding {
+      padding: 0px;
+    }
+
+    .container__title {
+      text-align: end;
+      width: 100%;
+      border-bottom: 2px solid #6e6e6e;
+    }
+
+    .container__title__title {
+      color: #023671;
+      font-size: 24pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    h1.container__title__title {
+      margin-bottom: 4px !important;
+    }
+
+    h3.container__title__subtitle {
+      margin-top: 4px !important;
+    }
+
+    .container__title__subtitle {
+      color: #023671;
+      font-size: 16pt !important;
+      font-family: "Calibri";
+      font-weight: normal;
+    }
+
+    .cellSx {
+      text-align: center;
+      background-color: #eeeeee !important;
+      width: 50%;
+    }
+
+    .cellDx {
+      text-align: center;
+      width: 50%;
+    }
+
+    table {
+      border: 1px solid #333;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid #333;
+    }
+
+    /* NB */
+
+    .container__nb {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    /* INDICE */
+
+    .container__contenuti {
+      padding-top: 0pt;
+      padding-bottom: 0;
+    }
+
+    .container__inner_contenuti {
+      padding: 1rem;
+    }
+
+    .contentuti__row {
+      display: flex;
+      width: 100%;
+    }
+
+    .contenuti__row__sx {
+      width: 90%;
+      border-bottom: 1px dotted #ccc;
+    }
+
+    .contenuti__row__dx {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* get by script */
+    .table3 {
+      position: relative;
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      /*  border: 1px solid white; */
+    }
+
+    .table3 th {
+      color: black;
+    }
+
+    .table3 td {
+      color: rgb(0, 0, 0);
+    }
+
+    .table3 th,
+    .table3 td {
+      /* border: none;*/
+      /*  border: 1px solid rgb(255, 255, 255); */
+      /* Aggiunge un bordo alle celle */
+      font-size: 9px;
+      /* white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+      color: #023671;
+    }
+
+    .bkT2 {
+      border: none;
+      background-color: white;
+      color: #023671;
+    }
+
+    .bkT1 {
+      border: none;
+      background-color: #023671;
+      color: rgba(255, 255, 255, 0.932);
+    }
+
+    .regular__min {
+      text-align: justify;
+    }
+
+    .tableBuilding {
+      width: 100%;
+      border: 0.5px solid black !important;
+    }
+
+    .thBuilding {
+      text-align: center;
+      border: 0.5px solid black !important;
+    }
+
+    .pBuilding {
+      color: #1f497d !important;
+      font-size: x-small;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="container">
+      <div class="container__title">
+        <h1 class="container__title__title">Rintraccio Anagrafico</h1>
+        <h3 class="container__title__subtitle">Persona fisica</h3>
+      </div>
+      <!-- TABELLA -->
+      <table style="width: 100%; margin-top: 50px">
+        {{#if registry.surname}}
+        <thead>
+          <th colspan="2">
+            <p class="bold no-margin" style="text-align: center">
+              {{registry.name}} {{registry.surname}}
+            </p>
+          </th>
+        </thead>
+        {{/if}}
+        <tbody>
+          <tr style="border: none">
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                INFORMAZIONE N°
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{informazioneN}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                RIF. CLIENTE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                DATA RICHIESTA
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{inputData.dateRequested}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                DATA EVASIONE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{inputData.dateFulfillment}}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- DATI INPUT -->
+      <table style="width: 100%; margin-top: 50px">
+        <thead>
+          <th colspan="2">
+            <p class="bold no-margin" style="text-align: center">
+              DATI INPUT
+            </p>
+          </th>
+        </thead>
+        <tbody>
+          <tr style="border: none">
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">COGNOME</p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.surname}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">NOME</p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.name}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                CODICE FISCALE
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.cf}}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                COMUNE DI RESIDENZA
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.municipality}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                INDIRIZZO
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                {{registry.address}}
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="width: 50%; background: #eeeeee">
+              <p class="bold no-margin" style="text-align: center">
+                NOME PRODOTTO
+              </p>
+            </td>
+            <td style="width: 50%">
+              <p class="regular no-margin" style="text-align: center">
+                Rintraccio ANAGRAFICO
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- N.B. -->
+      <div class="container__nb breakPage">
+        <span class="bold">N.B.</span>
+        <p class="regular__min">
+          Le informazioni ed i dati forniti dalla nostra azienda alla propria
+          clientela, sono raccolti e trattati secondo quanto disposto dal D.
+          Lgs. 196 del 2003 e dal nuovo RE 679/2016. I clienti possono quindi
+          utilizzare i dati e le informazioni fornite secondo le modalità
+          previste dalla legge per la tutela dei propri diritti.
+          L’informazione ha natura strettamente riservata, personale e
+          confidenziale, pertanto non può essere divulgata a terzi e tantomeno
+          in sede giudiziaria in quanto le informazioni presenti non sono
+          supportate da prove documentali. Ci esimiamo da qualsiasi
+          responsabilità consequenziale, di natura civile, penale derivanti da
+          dette violazioni. E’ sin da ora escluso qualunque titolo e motivo di
+          azione di rivalsa per le notizie fornite.
+        </p>
+      </div>
+      <!-- INDICE -->
+      <div class="container__contenuti breakPage">
+        <p class="bold">Contenuti</p>
+        <div class="container__inner_contenuti">
+          <a href="#RIEPILOGO_INDAGINE" style="text-decoration: none">
+            <div class="contentuti__row">
+              <div class="contenuti__row__sx">
+                <p class="regular">RIEPILOGO INDAGINE</p>
+              </div>
+              <div class="contenuti__row__dx">
+                <span class="regular" id="indice_riepilogo_indagine"style="display:none">::RIEPILOGO_INDAGINE</span>
+              </div>
+            </div>
+          </a>
+          <a href="#ANAGRAFICA" style="text-decoration: none">
+            <div class="contentuti__row">
+              <div class="contenuti__row__sx">
+                <p class="regular">ANAGRAFICA</p>
+              </div>
+              <div class="contenuti__row__dx">
+                <span class="regular"style="display:none">::ANAGRAFICA</span>
+              </div>
+            </div>
+          </a>
+          <a href="#REPERIBILITÀ" style="text-decoration: none">
+            <div class="contentuti__row">
+              <div class="contenuti__row__sx">
+                <p class="regular">REPERIBILITÀ</p>
+              </div>
+              <div class="contenuti__row__dx">
+                <span class="regular"style="display:none">::REPERIBILITÀ</span>
+              </div>
+            </div>
+          </a>
+          <a href="#RECAPITI_TELEFONICI" style="text-decoration: none">
+            <div class="contentuti__row">
+              <div class="contenuti__row__sx">
+                <p class="regular">RECAPITI TELEFONICI</p>
+              </div>
+              <div class="contenuti__row__dx">
+                <span class="regular"style="display:none">::RECAPITI_TELEFONICI</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- RIEPILOGO INDAGINE -->
+      <div class="container_riepilogo_indagine breakPage" id="RIEPILOGO_INDAGINE">
+        <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+          :RIEPILOGO INDAGINE
+        </p>
+        <!-- TABELLA -->
+        <table style="width: 100%; margin-top: 25px">
+          {{#if registry.surname}}
+          <thead>
+            <th colspan="2">
+              <p class="bold no-margin" style="text-align: center">
+                {{registry.name}} {{registry.surname}}
+              </p>
+            </th>
+          </thead>
+          {{/if}}
+          <tbody>
+            <tr style="border: none">
+              <td style="width: 50%; background: #eeeeee">
+                <a href="#ANAGRAFICA" style="text-decoration: none">
+                  <p class="bold no-margin" style="text-align: center">
+                    ANAGRAFICA
+                  </p>
+                </a>
+              </td>
+              {{#if registry}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #008000">
+                  PRESENTE
+                </p>
+              </td>
+              {{else}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                  NON PRESENTE
+                </p>
+              </td>
+              {{/if}}
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <a href="#REPERIBILITÀ" style="text-decoration: none">
+                  <p class="bold no-margin" style="text-align: center">
+                    REPERIBILITÀ
+                  </p>
+                </a>
+              </td>
+              {{#if isReperibilita}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #008000">
+                  CONFERMATA
+                </p>
+              </td>
+              {{else}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                  NON CONFERMATA
+                </p>
+              </td>
+              {{/if}}
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <a href="#RECAPITI_TELEFONICI" style="text-decoration: none">
+                  <p class="bold no-margin" style="text-align: center">
+                    RECAPITI TELEFONICI
+                  </p>
+                </a>
+              </td>
+              {{#if contactPhoneNumber.length}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #008000">
+                  PRESENTI
+                </p>
+              </td>
+              {{else}}
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: center; color: #ff0000">
+                  NON PRESENTI
+                </p>
+              </td>
+              {{/if}}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- ANAGRAFICA -->
+      <div class="container" id="ANAGRAFICA">
+        <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+          :ANAGRAFICA
+        </p>
+        <!-- TABELLA -->
+        <table style="width: 100%">
+          <tbody>
+            <tr style="border: none">
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  COGNOME
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.surname}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">NOME</p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.name}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  CODICE FISCALE
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.cf}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  DATA DI NASCITA
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.dateOfBirth}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  LUOGO DI NASCITA
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.placeOfBirth}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  PROVINCIA DI NASCITA
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{registry.provinceOfBirth}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  INDIRIZZO
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.address}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">CAP</p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.cap}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  COMUNE
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">
+                  {{registry.municipality}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  PROVINCIA
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{registry.province}}</p>
+              </td>
+            </tr>
+             {{#each domicile as |dom|}}
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  INDIRIZZO (DOMICILIO)
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{dom.address}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  CAP (DOMICILIO)
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{dom.postalCode}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  COMUNE (DOMICILIO)
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{dom.common}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background: #eeeeee">
+                <p class="bold no-margin" style="text-align: left">
+                  PROVINCIA (DOMICILIO)
+                </p>
+              </td>
+              <td style="width: 50%">
+                <p class="regular no-margin" style="text-align: left">{{dom.province}}</p>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <!-- REPERIBILITA -->
+      <div class="container" id="REPERIBILITÀ">
+        <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+          :REPERIBILITÀ
+        </p>
+        {{#if availability.length}}
+          {{#each availability as |ava|}}
+          {{#if (isReperibilita)}}
+          <p class="regular">
+            A seguito
+            delle indagini effettuate abbiamo constatato che il richiesto domicilia di fatto al seguente indirizzo:
+          </p>
+          <table style="width: 100%; border: none !important">
+            <tbody>
+              <tr>
+                <td style="border: none !important">
+                  <p class="regular no-margin">{{ava}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+            {{else}}
+            <p class="regular">
+              {{ava}}
+            </p>
+          {{/if}}
+          {{/each}}
+          {{else}}
+          <p class="regular">
+            A seguito
+            delle indagini effettuate abbiamo constatato che il richiesto non domicilia presso l'indirizzo di residenza.
+            Allo
+            stato attuale, nonostante le ricerche effettuate ad ampissimo raggio, non è stato possibile rintracciare il
+            luogo
+            dove sia reperibile.
+          </p>
+          {{/if}}
+      </div>
+      <!-- RECAPITI TELEFONICI -->
+      <div class="container" id="RECAPITI_TELEFONICI" class="breakPage">
+        <p class="bold" style="border-bottom: 2px solid #6e6e6e">
+          :RECAPITI TELEFONICI
+        </p>
+        {{#if contactPhoneNumber.length}}
+        <p class="regular">
+          A seguito delle indagini effettuate, abbiamo constatato che il richiesto è
+          reperibile alle seguenti utenze telefoniche:
+        </p>
+        {{else}}
+        <p class="regular">
+          A seguito delle indagini effettuate, abbiamo constatato che il richiesto non è
+          reperibile ad alcuna utenza telefonica attiva a lui collegata
+        </p>
+        <table style="width: 100%; border: none !important">
+          <tbody>
+            {{#each contactPhoneNumber as |num|}}
+            <tr>
+              {{#if num.fixed}}
+              <td style="border: none !important">
+                <p class="regular no-margin">Telefono fisso: {{num.contact}}</p>
+                <p class="regular no-margin">{{num.note}}</p>
+              </td>
+              {{else}}
+              <td style="border: none !important">
+                <p class="regular no-margin">Telefono mobile: {{num.contact}}</p>
+                <p class="regular no-margin">{{num.note}}</p>
+              </td>
+              {{/if}}
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>        
+        {{/if}}
+        <table style="width: 100%; border: none !important">
+          <tbody>
+            {{#each notePhoneNumber as |ntel|}}
+            <tr>
+              <td style="border: none !important">
+                <p class="regular no-margin">{{ntel.note}}</p>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

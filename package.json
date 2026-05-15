@@ -1,0 +1,47 @@
+{
+  "name": "az-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "nodemon": "nodemon",
+    "build": "npx tsc",
+    "local": "npx tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "job": "npx tsc && dotenv cross-var pm2-runtime start ./dist/index.js --cron %CRON_EXPRESSION_JOB%"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/nodemailer": "^6.4.16",
+    "axios": "^1.6.2",
+    "codice-fiscale-js": "^2.3.22",
+    "cross-var": "^1.1.0",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
+    "handlebars": "^4.7.8",
+    "html-pdf-node": "file:customNode_modules/html-pdf-node",
+    "moment": "^2.30.1",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.15",
+    "nodemon": "^3.0.2",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "3.11.174",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "pm2": "^5.4.2",
+    "puppeteer": "^23.5.0",
+    "sequelize": "^6.35.2",
+    "ssh2-sftp-client": "^9.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "xlsx": "^0.18.5",
+    "xlsx-js-style": "^1.2.0",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/html-pdf-node": "^1.0.2",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.5",
+    "@types/ssh2-sftp-client": "^9.0.3"
+  }
+}
